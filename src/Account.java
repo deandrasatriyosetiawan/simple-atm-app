@@ -1,4 +1,3 @@
-import java.net.SocketTimeoutException;
 import java.util.*;
 
 public abstract class Account {
@@ -10,18 +9,21 @@ public abstract class Account {
   private double balance;
   // The user that owns this account
   private User holder;
+  // The bank card identity number in which the account was linked
+  private String inBankCardId;
   // The list of transactions for this account
   private ArrayList<Transaction> transactions;
 
   // Create a new account
-  public Account(String accountId, String pin, User holder) {
+  public Account(String bankCardId, String accountId, String pin, User holder) {
+    this.inBankCardId = bankCardId;
     this.accountId = accountId;
     this.pin = pin;
     this.balance = 0.00;
     this.holder = holder;
   }
 
-  // Add a new transaction in this account
+  // Add a new transaction of the account
   abstract public void addTransaction(double amount, String note);
 
   // Get summary line for the account
@@ -47,6 +49,16 @@ public abstract class Account {
     return this.holder;
   }
 
+  // Get the bank card identity number of the account
+  protected String getBankCardId() {
+    return this.inBankCardId;
+  }
+
+  // Add a bank card identity number of the account
+  // public void addBankCardId(String newBankCardId) {
+  // this.inBankCardId = newBankCardId;
+  // }
+
   // Get the list of transactions of the account
   protected ArrayList<Transaction> getTransactionList() {
     return this.transactions;
@@ -62,7 +74,7 @@ public abstract class Account {
   }
 
   //
-  public boolean validatePin() {
+  public boolean validatePin(String pin) {
 
   }
 

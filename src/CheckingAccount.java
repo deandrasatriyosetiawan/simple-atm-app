@@ -2,8 +2,8 @@ import java.util.*;
 
 public class CheckingAccount extends Account {
   // Initialize values to the attribute of the account
-  public CheckingAccount(String accountId, String pin, User holder) {
-    super(accountId, pin, holder);
+  public CheckingAccount(String bankCardId, String accountId, String pin, User holder) {
+    super(bankCardId, accountId, pin, holder);
   }
 
   // Add a new transaction in the checking account

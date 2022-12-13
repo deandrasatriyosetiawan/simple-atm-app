@@ -7,7 +7,7 @@ public class User {
   private String firstName;
   // The user identity number of the user
   private String userId;
-  // The bank card identity number of the user
+  // The list of user's bank card identity number
   private ArrayList<String> bankCardIdList;
   // The checking account of the user
   private ArrayList<CheckingAccount> checkingAccounts;
@@ -17,17 +17,16 @@ public class User {
   // Set a user's fullname, user's id, user's bank card id,
   // create an empty lists of checking accounts and saving accounts,
   // and also print an information that a new user has been created
-  public User(String fullName, Bank bank) {
+  public User(String fullName, String bankCardId, Bank bank) {
     this.fullName = fullName;
+    this.bankCardIdList.add(bankCardId);
     this.userId = bank.getNewUserId();
-    String bankCardId = bank.getNewBankCardId();
-    bank.addBankCardId(bankCardId);
     this.checkingAccounts = new ArrayList<CheckingAccount>();
     this.savingsAccounts = new ArrayList<SavingsAccount>();
     System.out.printf("New user " + fullName + " with ID " + this.userId + " created");
   }
 
-  // Get the user identity number
+  // Get the user id number
   public String getUserId() {
     return userId;
   }
@@ -52,6 +51,11 @@ public class User {
   public void addAccount(CheckingAccount newCheckingAccount, SavingsAccount newSavingsAccount) {
     this.checkingAccounts.add(newCheckingAccount);
     this.savingsAccounts.add(newSavingsAccount);
+  }
+
+  // Add a new bank card id number to the list of user's bank card id number
+  public void addBankCardId(String newBankCardId) {
+    this.bankCardIdList.add(newBankCardId);
   }
 
   // Print summary for the account of this user

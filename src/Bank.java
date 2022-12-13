@@ -22,12 +22,17 @@ public class Bank {
     this.bankCardIdList = new ArrayList<String>();
   }
 
+  // Get the name of the bank
+  public String getName() {
+    return this.name;
+  }
+
   // Generate a new user identity number for a user
   public String getNewUserId() {
     String userId;
     Random random = new Random();
     int lengthUserId = 16;
-    boolean isUserIdUnique = false;
+    boolean isUserIdNotUnique = false;
     do {
       userId = "";
       for (int a = 0; a < lengthUserId; a++) {
@@ -35,11 +40,11 @@ public class Bank {
       }
       for (User user : users) {
         if (userId.compareTo(user.getUserId()) == 0) {
-          isUserIdUnique = true;
+          isUserIdNotUnique = true;
           break;
         }
       }
-    } while (isUserIdUnique);
+    } while (isUserIdNotUnique);
     return userId;
   }
 
@@ -48,7 +53,7 @@ public class Bank {
     String accountId;
     Random random = new Random();
     int lengthAccountId = 10;
-    boolean isAccountIdUnique = false;
+    boolean isAccountIdNotUnique = false;
     do {
       accountId = "";
       for (int a = 0; a < lengthAccountId; a++) {
@@ -56,17 +61,17 @@ public class Bank {
       }
       for (Account checkingAccount : checkingAccounts) {
         if (accountId.compareTo(checkingAccount.getAccountId()) == 0) {
-          isAccountIdUnique = true;
+          isAccountIdNotUnique = true;
           break;
         }
       }
       for (Account savingsAccount : savingsAccounts) {
         if (accountId.compareTo(savingsAccount.getAccountId()) == 0) {
-          isAccountIdUnique = true;
+          isAccountIdNotUnique = true;
           break;
         }
       }
-    } while (isAccountIdUnique);
+    } while (isAccountIdNotUnique);
     return accountId;
   }
 
@@ -75,7 +80,7 @@ public class Bank {
     String bankCardId;
     Random random = new Random();
     int lengthBankCardId = 16;
-    boolean isBankCardIdUnique = false;
+    boolean isBankCardIdNotUnique = false;
     do {
       bankCardId = "";
       for (int a = 0; a < lengthBankCardId; a++) {
@@ -83,11 +88,11 @@ public class Bank {
       }
       for (User user : users) {
         if (bankCardId.compareTo(user.getUserId()) == 0) {
-          isBankCardIdUnique = true;
+          isBankCardIdNotUnique = true;
           break;
         }
       }
-    } while (isBankCardIdUnique);
+    } while (isBankCardIdNotUnique);
     return bankCardId;
   }
 
@@ -109,16 +114,46 @@ public class Bank {
   // Add a new user to the bank and also create checking account
   // and savings account for the user
   public User addUser(String fullName, String pin) {
-    User newUser = new User(fullName, this);
+    String bankCardId = this.getNewBankCardId();
+    this.addBankCardId(bankCardId);
+
+    User newUser = new User(fullName, bankCardId, this);
     this.users.add(newUser);
-    String accountId = getNewAccountId();
-    CheckingAccount newCheckingAccount = new CheckingAccount(accountId, pin, newUser);
+
+    String accountId = this.getNewAccountId();
+    CheckingAccount newCheckingAccount = new CheckingAccount(bankCardId, accountId, pin, newUser);
     this.addAccount(newCheckingAccount);
-    accountId = getNewAccountId();
-    SavingsAccount newSavingsAccount = new SavingsAccount(accountId, pin, newUser);
+    accountId = this.getNewAccountId();
+    SavingsAccount newSavingsAccount = new SavingsAccount(bankCardId, accountId, pin, newUser);
     this.addAccount(newSavingsAccount);
     newUser.addAccount(newCheckingAccount, newSavingsAccount);
+
     return newUser;
+  }
+
+  // Get the User object if user identity number and PIN are valid
+  public User userLogin(String userId, String pin) {
+    boolean isCorrect;
+    User checkingAccountHolder, savingsAccountHolder;
+    for(Account account : this.checkingAccounts) {
+      int isUserIdEquals = userId.compareTo(account.getHolder().getUserId());
+      if(isUserIdEquals == 0) {
+        checkingAccountHolder = account.getHolder();
+        // isCorrect = account.validatePin(pin);
+      }
+    }
+    for(Account account : this.savingsAccounts) {
+      int isUserIdEquals = userId.compareTo(account.getHolder().getUserId());
+      if(isUserIdEquals == 0) {
+        savingsAccountHolder = account.getHolder();
+        // isCorrect = account.validatePin(pin);
+      }
+    }
+    for(User user : this.users) {
+      
+      if (userId.compareTo(user.getUserId()) == 0 && user.) {
+      }
+    }
   }
 
 }
