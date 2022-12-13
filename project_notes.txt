@@ -1,0 +1,28 @@
+Ketentuan Program :
+- Total class minimal 5 --> completed
+- Class harus ada yang inheritance (is-a) dan komposisi class (has-a) harus tepat --> completed
+- Pilih minimal 3 di antara 4 pilar OOP (abstraction, encapsulation, inheritance, polymorphism) --> completed
+- Tampilan CLI/GUI --> completed
+- Komponen lain-lain (inovasi, manfaat, dsb)
+
+Ketentuan Presentasi :
+- Maksimal 10 menit
+
+Gambaran Menu Utama Program :
+1) Ganti PIN/Change PIN
+2) Informasi Saldo/Balance Inquiry
+3) Penarikan Tunai/Withdrawal
+4) Setoran/Deposit
+5) Transfer
+6) Riwayat Transaksi/Transaction History
+7) Switch Account
+8) Exit
+
+Hubungan antar class :
+- Bank has many users
+- User has a checking account
+- User has a savings account
+- Checking account is an account
+- Savings account is an account
+- Checking account has many transactions
+- Savings account has many transactions
