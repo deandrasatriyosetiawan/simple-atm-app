@@ -15,7 +15,6 @@ public abstract class Account {
   // Initialize values to the attribute of the account
   public Account(String accountId, String pin, User holder) {
     this.accountId = accountId;
-    // Set user's pin
     this.pin = pin;
     this.balance = 0.00;
     this.holder = holder;

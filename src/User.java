@@ -8,7 +8,7 @@ public class User {
   // The user identity number of the user
   private String userId;
   // The bank card identity number of the user
-  private ArrayList<String> bankCardIdLists;
+  private ArrayList<String> bankCardIdList;
   // The checking account of the user
   private ArrayList<CheckingAccount> checkingAccounts;
   // The savings account of the user
@@ -16,20 +16,18 @@ public class User {
 
   // Initialize values to the attribute of the user
   public User(String fullName, String pin, Bank bank) {
-    // Set user's full name
     this.fullName = fullName;
-    // Get a new user identity number for the user
-    this.userId = Bank.getNewUserId;
-    // Get a bank new card identity number for the user
-    // and add it to user's list of bank card identity number
-    String bankCardId = Bank.getNewBankCardId;
-    this.bankCardIdLists.add(bankCardId);
-    // Create empty list of user's checking accounts
+    this.userId = bank.getNewUserId();
+    String bankCardId = bank.getNewBankCardId();
+    bank.addBankCardId(bankCardId);
     this.checkingAccounts = new ArrayList<CheckingAccount>();
-    // Create empty list of user's savings accounts
     this.savingsAccounts = new ArrayList<SavingsAccount>();
-    // Print the log message
     System.out.printf("New user " + fullName + " with ID " + this.userId + " created");
+  }
+
+  // Getting the user identity number
+  public String getUserId() {
+    return userId;
   }
 
 }
