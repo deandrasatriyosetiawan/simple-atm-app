@@ -1,5 +1,6 @@
 import java.util.*;
-import java.time.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
   // The amount of the transaction
@@ -41,6 +42,19 @@ public class Transaction {
   // Get the amount of the transaction
   public double getAmount() {
     return this.amount;
+  }
+
+  // Change the format of the transaction's timestamp
+  private String changeTimestampFormat(LocalDateTime timestamp) {
+    DateTimeFormatter timestampFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    String formattedTimestamp = timestamp.format(timestampFormatter);
+    return formattedTimestamp;
+  }
+
+  // Get a summary of the transaction
+  public String getSummaryTransaction() {
+    String timestamp = this.changeTimestampFormat(this.timestamp);
+    return String.format("%s : $%.2f : %s", timestamp, this.amount, this.note);
   }
 
 }

@@ -56,7 +56,7 @@ public abstract class Account {
   public void printTransactionHistory() {
     System.out.printf("\nTransaction history for account %s\n", this.accountId);
     for (int len = this.transactions.size() - 1; len >= 0; len--) {
-      System.out.println(this.transactions.get(len).getSummaryLine());
+      System.out.println(this.transactions.get(len).getSummaryTransaction());
     }
     System.out.println();
   }
