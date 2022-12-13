@@ -1,4 +1,4 @@
-## Group Member of This Project
+## Group Members of This Project
 - Deandra Satriyo Setiawan (2110511089)
 - Aurel Izzety (2110511147)
 
