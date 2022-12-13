@@ -1,3 +1,7 @@
+## Group Member of This Project
+- Deandra Satriyo Setiawan (2110511089)
+- Aurel Izzety (2110511147)
+
 ## Getting Started
 
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
