@@ -7,14 +7,14 @@ public class SimpleATM {
         // Initialize the name of our bank
         Bank bank = new Bank("Pochita Bank");
         // Add a user to our bank
-        User user = bank.addUser("Anya Forger", "12345");
+        User user = bank.addUser("Anya Forger", "123456");
         // The interface of the ATM
         while (true) {
             // The reference for users who will log in
             User currentUser;
-            // Validating user who will log in
+            // Validate user who will log in
             currentUser = ATM.validateUser(bank, scanner);
-            // Serving users who have successfully logged in
+            // Serve users who have successfully logged in
             ATM.mainMenu(currentUser, scanner);
         }
     }

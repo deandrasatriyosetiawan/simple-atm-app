@@ -1,3 +1,4 @@
+import java.net.SocketTimeoutException;
 import java.util.*;
 
 public abstract class Account {
@@ -12,7 +13,7 @@ public abstract class Account {
   // The list of transactions for this account
   private ArrayList<Transaction> transactions;
 
-  // Initialize values to the attribute of the account
+  // Create a new account
   public Account(String accountId, String pin, User holder) {
     this.accountId = accountId;
     this.pin = pin;
@@ -20,29 +21,49 @@ public abstract class Account {
     this.holder = holder;
   }
 
-  // Getting the name of the account
-  // protected String getName() {
-  // return this.name;
-  // }
+  // Add a new transaction in this account
+  abstract public void addTransaction(double amount, String note);
 
-  // Getting the account identity number of the account
+  // Get summary line for the account
+  abstract public String getSummaryLine();
+
+  // Get the account identity number of the account
   protected String getAccountId() {
     return this.accountId;
   }
 
-  // Getting the personal identification number of the account
+  // Get the personal identification number of the account
   protected String getPin() {
     return this.pin;
   }
 
-  // Getting the balance of the account
+  // Get the balance of the account
   protected double getBalance() {
     return this.balance;
   }
 
-  // Getting the holder of the account
+  // Get the holder of the account
   protected User getHolder() {
     return this.holder;
+  }
+
+  // Get the list of transactions of the account
+  protected ArrayList<Transaction> getTransactionList() {
+    return this.transactions;
+  }
+
+  // Print the transaction history of the account
+  public void printTransactionHistory() {
+    System.out.printf("\nTransaction history for account %s\n", this.accountId);
+    for (int len = this.transactions.size() - 1; len >= 0; len--) {
+      System.out.println(this.transactions.get(len).getSummaryLine());
+    }
+    System.out.println();
+  }
+
+  //
+  public boolean validatePin() {
+
   }
 
 }

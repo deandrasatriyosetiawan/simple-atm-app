@@ -12,7 +12,7 @@ public class Bank {
   // The list of bank cards identity number in this bank
   private ArrayList<String> bankCardIdList;
 
-  // Set a name of the bank and make an empty lists of users,
+  // Set a name of the bank and create an empty lists of users,
   // checking accounts, savings accounts, and bank card id list
   public Bank(String name) {
     this.name = name;
@@ -91,27 +91,33 @@ public class Bank {
     return bankCardId;
   }
 
-  // Add a new checking account and savings account
-  public void addAccount(CheckingAccount newCheckingAccount, SavingsAccount newSavingsAccount) {
+  // Add a new checking account to the bank
+  public void addAccount(CheckingAccount newCheckingAccount) {
     this.checkingAccounts.add(newCheckingAccount);
+  }
+
+  // Add a new savings account to the bank
+  public void addAccount(SavingsAccount newSavingsAccount) {
     this.savingsAccounts.add(newSavingsAccount);
   }
 
-  // Add a new bank card identity
+  // Add a new bank card identity to the bank
   public void addBankCardId(String newBankCardId) {
     this.bankCardIdList.add(newBankCardId);
   }
 
-  // Add a new user in this bank and also create checking account
+  // Add a new user to the bank and also create checking account
   // and savings account for the user
   public User addUser(String fullName, String pin) {
-    User newUser = new User(fullName, pin, this);
+    User newUser = new User(fullName, this);
     this.users.add(newUser);
     String accountId = getNewAccountId();
     CheckingAccount newCheckingAccount = new CheckingAccount(accountId, pin, newUser);
+    this.addAccount(newCheckingAccount);
+    accountId = getNewAccountId();
     SavingsAccount newSavingsAccount = new SavingsAccount(accountId, pin, newUser);
-    this.addAccount(newCheckingAccount, newSavingsAccount);
-    // TODO : Add those accounts to the User object with addAccount method
+    this.addAccount(newSavingsAccount);
+    newUser.addAccount(newCheckingAccount, newSavingsAccount);
     return newUser;
   }
 

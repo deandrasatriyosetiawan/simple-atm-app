@@ -3,7 +3,7 @@ Ketentuan Program :
 - Class harus ada yang inheritance (is-a) dan komposisi class (has-a) harus tepat --> completed
 - Pilih minimal 3 di antara 4 pilar OOP (abstraction, encapsulation, inheritance, polymorphism) --> completed
 - Tampilan CLI/GUI --> completed
-- Komponen lain-lain (inovasi, manfaat, dsb)
+- Komponen lain-lain (inovasi, manfaat, dsb) --> completed
 
 Ketentuan Presentasi :
 - Maksimal 10 menit
@@ -20,8 +20,10 @@ Gambaran Menu Utama Program :
 
 Hubungan antar class :
 - Bank has many users
-- User has a checking account
-- User has a savings account
+- Bank has many checking accounts
+- Bank has many savings accounts
+- User has many checking accounts
+- User has many savings accounts
 - Checking account is an account
 - Savings account is an account
 - Checking account has many transactions

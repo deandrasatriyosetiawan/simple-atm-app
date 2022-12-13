@@ -14,8 +14,10 @@ public class User {
   // The savings account of the user
   private ArrayList<SavingsAccount> savingsAccounts;
 
-  // Initialize values to the attribute of the user
-  public User(String fullName, String pin, Bank bank) {
+  // Set a user's fullname, user's id, user's bank card id,
+  // create an empty lists of checking accounts and saving accounts,
+  // and also print an information that a new user has been created
+  public User(String fullName, Bank bank) {
     this.fullName = fullName;
     this.userId = bank.getNewUserId();
     String bankCardId = bank.getNewBankCardId();
@@ -25,9 +27,37 @@ public class User {
     System.out.printf("New user " + fullName + " with ID " + this.userId + " created");
   }
 
-  // Getting the user identity number
+  // Get the user identity number
   public String getUserId() {
     return userId;
+  }
+
+  // Set the user's first name
+  public void setFirstName(String fullName) {
+    fullName = fullName.trim();
+    this.firstName = "";
+    for (int index = 0; index < fullName.length(); index++) {
+      if (fullName.charAt(index) == ' ')
+        break;
+      this.firstName += fullName.charAt(index);
+    }
+  }
+
+  // Get the user's first name
+  public String getFirstName() {
+    return this.firstName;
+  }
+
+  // Add a new checking account and savings account of the user
+  public void addAccount(CheckingAccount newCheckingAccount, SavingsAccount newSavingsAccount) {
+    this.checkingAccounts.add(newCheckingAccount);
+    this.savingsAccounts.add(newSavingsAccount);
+  }
+
+  // Print summary for the account of this user
+  public void printAccountSummary(CheckingAccount checkingAccount) {
+    System.out.print("\n\n" + this.getFirstName() + "'s ");
+    System.out.println(checkingAccount.getSummaryLine() + "\n");
   }
 
 }
