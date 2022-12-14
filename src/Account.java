@@ -16,6 +16,7 @@ public abstract class Account {
 
   // Create a new account
   public Account(String bankCardId, String accountId, String pin, User holder) {
+    this.transactions = new ArrayList<Transaction>();
     this.inBankCardId = bankCardId;
     this.accountId = accountId;
     this.pin = pin;

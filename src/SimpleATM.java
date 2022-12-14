@@ -93,21 +93,18 @@ public class SimpleATM {
                 SimpleATM.switchAccount(currentAccount, scanner, bank);
                 break;
             case 8:
-                System.exit(0);
+                scanner.nextLine();
+                SimpleATM.loginMenu(bank, scanner);
             default:
                 SimpleATM.mainMenu(currentAccount, scanner, bank);
+                break;
         }
     }
 
     // Lead the user to return to main menu
     public static void returnToMainMenu(Account currentAccount, Scanner scanner, Bank bank) {
-        String input;
-        do {
-            System.out.print("\nPlease click enter to return to main menu.");
-            input = scanner.nextLine();
-            if (input.compareTo("\n") == 0)
-                SimpleATM.mainMenu(currentAccount, scanner, bank);
-        } while (input.compareTo("\n") != 0);
+        System.out.print("\nPlease click enter to return to main menu.");
+        SimpleATM.mainMenu(currentAccount, scanner, bank);
     }
 
     // Change the PIN of the bank card id
@@ -116,7 +113,8 @@ public class SimpleATM {
         int lengthPin;
         String newPin;
         do {
-            System.out.print("Enter the old pin\t: ");
+            scanner.nextLine();
+            System.out.print("Enter the old pin : ");
             String oldPin = scanner.nextLine();
             lengthPin = oldPin.length();
             isThePinCorrect = currentAccount.validatePin(oldPin);
@@ -125,7 +123,7 @@ public class SimpleATM {
         } while (!isThePinCorrect);
 
         do {
-            System.out.print("Enter a new pin\t: ");
+            System.out.print("Enter a new pin : ");
             newPin = scanner.nextLine();
             lengthPin = newPin.length();
             if (lengthPin == 0) {
@@ -139,7 +137,7 @@ public class SimpleATM {
         } while (!isThePinCorrect);
 
         do {
-            System.out.print("Re-enter the new pin\t: ");
+            System.out.print("Re-enter the new pin : ");
             String newReenterPin = scanner.nextLine();
             lengthPin = newReenterPin.length();
             if (lengthPin == 0) {
@@ -160,6 +158,8 @@ public class SimpleATM {
         } while (!isThePinCorrect);
 
         currentAccount.setPin(newPin);
+        Account account = bank.getAccount(currentAccount);
+        account.setPin(newPin);
         SimpleATM.returnToMainMenu(currentAccount, scanner, bank);
 
     }
@@ -220,11 +220,13 @@ public class SimpleATM {
                 } else if (amount > balance) {
                     System.out.printf("Amount must not be greater than balance of $%.2f.\n", balance);
                 }
-                System.out.print("Enter a note : ");
-                String note = scanner.nextLine();
-                amount *= -1;
-                currentAccount.addTransaction(amount, note);
             } while (amount < 0 || amount > balance);
+            System.out.print("Enter a note : ");
+            String note = scanner.nextLine();
+            Account savingsAccount = bank.getAccount(currentAccount);
+            savingsAccount.addTransaction(amount, note);
+            amount *= -1;
+            currentAccount.addTransaction(amount, note);
         } else if (className.compareTo("SavingsAccount") == 0) {
             System.out.println("Savings account can't transfer to a checking account.");
         }

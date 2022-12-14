@@ -31,7 +31,7 @@ public class Bank {
   public String getNewUserId() {
     String userId;
     Random random = new Random();
-    int lengthUserId = 16;
+    int lengthUserId = 4; // 16
     boolean isUserIdNotUnique = false;
     do {
       userId = "";
@@ -52,7 +52,7 @@ public class Bank {
   public String getNewAccountId() {
     String accountId;
     Random random = new Random();
-    int lengthAccountId = 10;
+    int lengthAccountId = 4; // 10
     boolean isAccountIdNotUnique = false;
     do {
       accountId = "";
@@ -79,7 +79,7 @@ public class Bank {
   public String getNewBankCardId() {
     String bankCardId;
     Random random = new Random();
-    int lengthBankCardId = 16;
+    int lengthBankCardId = 4; // 16
     boolean isBankCardIdNotUnique = false;
     do {
       bankCardId = "";
@@ -99,21 +99,36 @@ public class Bank {
   // Add a new user to the bank and also create checking account
   // and savings account for the user
   public User addUser(String fullName, String pin) {
-    String bankCardId = getNewBankCardId();
+    String bankCardId = this.getNewBankCardId();
     this.addBankCardId(bankCardId);
 
     User newUser = new User(fullName, bankCardId, this);
     this.users.add(newUser);
 
-    String accountId = getNewAccountId();
+    String accountId = this.getNewAccountId();
     CheckingAccount newCheckingAccount = new CheckingAccount(bankCardId, accountId, pin, newUser);
     this.addAccount(newCheckingAccount);
-    accountId = getNewAccountId();
+    accountId = this.getNewAccountId();
     SavingsAccount newSavingsAccount = new SavingsAccount(bankCardId, accountId, pin, newUser);
     this.addAccount(newSavingsAccount);
     newUser.addAccount(newCheckingAccount, newSavingsAccount);
 
     return newUser;
+  }
+
+  // Add a new checking account to the bank
+  public void addAccount(CheckingAccount newCheckingAccount) {
+    this.checkingAccounts.add(newCheckingAccount);
+  }
+
+  // Add a new savings account to the bank
+  public void addAccount(SavingsAccount newSavingsAccount) {
+    this.savingsAccounts.add(newSavingsAccount);
+  }
+
+  // Add a new bank card id to the bank
+  public void addBankCardId(String newBankCardId) {
+    this.bankCardIdList.add(newBankCardId);
   }
 
   // Get the Account object if user id number, bank card id number, and PIN are
@@ -139,21 +154,6 @@ public class Bank {
       }
     }
     return null;
-  }
-
-  // Add a new checking account to the bank
-  public void addAccount(CheckingAccount newCheckingAccount) {
-    this.checkingAccounts.add(newCheckingAccount);
-  }
-
-  // Add a new savings account to the bank
-  public void addAccount(SavingsAccount newSavingsAccount) {
-    this.savingsAccounts.add(newSavingsAccount);
-  }
-
-  // Add a new bank card id to the bank
-  public void addBankCardId(String newBankCardId) {
-    this.bankCardIdList.add(newBankCardId);
   }
 
   // Get a checking account from the list of checking account

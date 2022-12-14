@@ -14,10 +14,12 @@ public class SavingsAccount extends Account {
   // Get summary line for the savings account
   @Override
   public void printAccountSummary() {
-    double balance = this.getBalance();
+    String bankCardId = this.getBankCardId();
     String accountId = this.getAccountId();
     System.out.print("\n\n" + this.getHolder().getFirstName() + "'s ");
-    System.out.printf("savings account summary\n%s : $%.2f", accountId, balance);
+    System.out.println("savings account summary");
+    System.out.println("Bank Card ID\t: " + bankCardId);
+    System.out.println("Account ID\t: " + accountId);
   }
 
   // Print the balance inquiry of the account

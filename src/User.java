@@ -21,8 +21,9 @@ public class User {
     this.checkingAccounts = new ArrayList<CheckingAccount>();
     this.savingsAccounts = new ArrayList<SavingsAccount>();
     this.bankCardIdList = new ArrayList<String>();
-    this.fullName = fullName;
     this.userId = bank.getNewUserId();
+    this.fullName = fullName;
+    this.setFirstName(fullName);
     this.bankCardIdList.add(bankCardId);
     // System.out.println("New user " + fullName + " has been created");
     // System.out.println("with user ID\t: " + this.userId);
