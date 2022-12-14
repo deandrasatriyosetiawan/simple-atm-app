@@ -1,7 +1,5 @@
 import java.util.*;
 
-import javax.lang.model.util.ElementScanner6;
-
 public class SimpleATM {
     public static void main(String[] args) throws Exception {
         // Scanner object for getting input from keyboard
