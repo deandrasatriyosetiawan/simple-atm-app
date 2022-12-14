@@ -1,5 +1,7 @@
 import java.util.*;
 
+import javax.lang.model.util.ElementScanner6;
+
 public class SimpleATM {
     public static void main(String[] args) throws Exception {
         // Scanner object for getting input from keyboard
@@ -61,6 +63,7 @@ public class SimpleATM {
             System.out.println();
             System.out.print("Enter choice : ");
             choice = scanner.nextInt();
+            System.out.println();
 
             if (choice < 1 || choice > 8)
                 System.out.println("Invalid choice. Please choose 1-8.");
@@ -74,7 +77,7 @@ public class SimpleATM {
                 SimpleATM.changePin(currentAccount, scanner);
                 break;
             case 2:
-                SimpleATM.showBalanceInquiry();
+                SimpleATM.showBalanceInquiry(currentAccount, scanner);
                 break;
             case 3:
                 SimpleATM.withdrawalFunds();
@@ -98,10 +101,22 @@ public class SimpleATM {
         }
     }
 
+    // Lead the user to return to main menu
+    public static void returnToMainMenu(Account currentAccount, Scanner scanner) {
+        String input;
+        do {
+            System.out.print("\nPlease click enter to return to main menu.");
+            input = scanner.nextLine();
+            if (input.compareTo("\n") == 0)
+                SimpleATM.mainMenu(currentAccount, scanner);
+        } while (input.compareTo("\n") != 0);
+    }
+
     // Change the PIN of the bank card id
     public static void changePin(Account currentAccount, Scanner scanner) {
         boolean isThePinCorrect;
         int lengthPin;
+        String newPin;
         do {
             System.out.print("Enter the old pin\t: ");
             String oldPin = scanner.nextLine();
@@ -110,32 +125,78 @@ public class SimpleATM {
             if (!isThePinCorrect)
                 System.out.println("Incorrect PIN combination. Please try again.");
         } while (!isThePinCorrect);
+
         do {
             System.out.print("Enter a new pin\t: ");
-            String newPin = scanner.nextLine();
-            lengthPin = newPin.length();
-            if (lengthPin == 0) {
-                System.out.println("PIN can't be empty. Please re-enter the new PIN.");
-                continue;
-            } else if ((lengthPin > 0 && lengthPin < 6) || lengthPin > 6) {
-                System.out.println("PIN must be 6 digits. Please re-enter the new PIN.");
-                continue;
-            }
-            System.out.print("Re-enter the new pin\t: ");
             newPin = scanner.nextLine();
-            currentAccount.setPin(newPin);
-        } while (!isThePinCorrect);
-        do {
-            System.out.print("Enter a new pin\t: ");
-            String newPin = scanner.nextLine();
             lengthPin = newPin.length();
+            if (lengthPin == 0) {
+                System.out.println("PIN can't be empty. Please re-enter the new PIN.");
+                isThePinCorrect = false;
+            } else if ((lengthPin > 0 && lengthPin < 6) || lengthPin > 6) {
+                System.out.println("PIN must be 6 digits. Please re-enter the new PIN.");
+                isThePinCorrect = false;
+            } else
+                isThePinCorrect = true;
+        } while (!isThePinCorrect);
+
+        do {
+            System.out.print("Re-enter the new pin\t: ");
+            String newReenterPin = scanner.nextLine();
+            lengthPin = newReenterPin.length();
             if (lengthPin == 0) {
                 System.out.println("PIN can't be empty. Please re-enter the new PIN.");
                 continue;
             } else if ((lengthPin > 0 && lengthPin < 6) || lengthPin > 6) {
                 System.out.println("PIN must be 6 digits. Please re-enter the new PIN.");
                 continue;
+            } else {
+                if (newReenterPin.compareTo(newPin) == 0) {
+                    isThePinCorrect = true;
+                    System.out.println("PIN has been changed.");
+                } else {
+                    isThePinCorrect = false;
+                    System.out.println("PIN must be the same as previously entered.");
+                }
             }
-        } while();
+        } while (!isThePinCorrect);
+
+        currentAccount.setPin(newPin);
+        SimpleATM.returnToMainMenu(currentAccount, scanner);
+
+    }
+
+    // Display the balance inquiry of the account
+    public static void showBalanceInquiry(Account currentAccount, Scanner scanner) {
+        currentAccount.printAccountSummary();
+        SimpleATM.returnToMainMenu(currentAccount, scanner);
+    }
+
+    // TODO : CONTINUE
+    // Withdrawal process from the account's balance
+    public void withdrawalFunds(Account currentAccount, Scanner scanner) {
+        double balance = currentAccount.getBalance();
+        System.out.printf("Enter the amount to withdraw (max $%.2f) : $", balance);
+        double amount = scanner.nextDouble();
+    }
+
+    // Withdrawal
+    public void depositFunds(Account currentAccount, Scanner scanner) {
+
+    }
+
+    // Withdrawal
+    public void transferFunds(Account currentAccount, Scanner scanner) {
+
+    }
+
+    // Withdrawal
+    public void showTransactionHistory(Account currentAccount, Scanner scanner) {
+
+    }
+
+    // Withdrawal
+    public void switchAccount(Account currentAccount, Scanner scanner) {
+
     }
 }

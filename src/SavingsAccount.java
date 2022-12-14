@@ -22,4 +22,6 @@ public class SavingsAccount extends Account {
     System.out.printf("savings account summary\n%s : $%.2f", accountId, balance);
   }
 
+  // TODO : Make a new method that to print balance inquiry
+
 }

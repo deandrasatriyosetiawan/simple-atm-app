@@ -34,11 +34,6 @@ public abstract class Account {
     return this.accountId;
   }
 
-  // Get the personal identification number of the account
-  protected String getPin() {
-    return this.pin;
-  }
-
   // Get the balance of the account
   protected double getBalance() {
     return this.balance;
@@ -57,6 +52,11 @@ public abstract class Account {
   // Set a new PIN of the account
   protected void setPin(String newPin) {
     this.pin = newPin;
+  }
+
+  // Get the personal identification number of the account
+  protected String getPin() {
+    return this.pin;
   }
 
   // Validate the PIN with the bank card id number
