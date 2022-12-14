@@ -40,7 +40,7 @@ public class User {
 
   // Get the user id number
   public String getUserId() {
-    return userId;
+    return this.userId;
   }
 
   // Set the user's first name
