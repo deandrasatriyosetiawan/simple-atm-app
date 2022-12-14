@@ -96,21 +96,6 @@ public class Bank {
     return bankCardId;
   }
 
-  // Add a new checking account to the bank
-  public void addAccount(CheckingAccount newCheckingAccount) {
-    this.checkingAccounts.add(newCheckingAccount);
-  }
-
-  // Add a new savings account to the bank
-  public void addAccount(SavingsAccount newSavingsAccount) {
-    this.savingsAccounts.add(newSavingsAccount);
-  }
-
-  // Add a new bank card id to the bank
-  public void addBankCardId(String newBankCardId) {
-    this.bankCardIdList.add(newBankCardId);
-  }
-
   // Add a new user to the bank and also create checking account
   // and savings account for the user
   public User addUser(String fullName, String pin) {
@@ -155,5 +140,51 @@ public class Bank {
     }
     return null;
   }
+
+  // Add a new checking account to the bank
+  public void addAccount(CheckingAccount newCheckingAccount) {
+    this.checkingAccounts.add(newCheckingAccount);
+  }
+
+  // Add a new savings account to the bank
+  public void addAccount(SavingsAccount newSavingsAccount) {
+    this.savingsAccounts.add(newSavingsAccount);
+  }
+
+  // Add a new bank card id to the bank
+  public void addBankCardId(String newBankCardId) {
+    this.bankCardIdList.add(newBankCardId);
+  }
+
+  // Get a checking account from the list of checking account
+  public Account getAccount(Account account) {
+    String bankCardId = account.getBankCardId();
+    String accountId = account.getAccountId();
+    for (Account checkingAccount : checkingAccounts) {
+      if (accountId.compareTo(checkingAccount.getAccountId()) == 0) {
+        break;
+      }
+      if (bankCardId.compareTo(checkingAccount.getBankCardId()) == 0) {
+        return checkingAccount;
+      }
+    }
+    for (Account savingsAccount : savingsAccounts) {
+      if (bankCardId.compareTo(savingsAccount.getBankCardId()) == 0) {
+        return savingsAccount;
+      }
+    }
+    return null;
+  }
+
+  // Get a savings account from the list of savings account
+  // public Account getAccount(Account checkingAccount) {
+  // String bankCardId = checkingAccount.getBankCardId();
+  // for (Account savingsAccount : savingsAccounts) {
+  // if (bankCardId.compareTo(savingsAccount.getBankCardId()) == 0) {
+  // return savingsAccount;
+  // }
+  // }
+  // return null;
+  // }
 
 }

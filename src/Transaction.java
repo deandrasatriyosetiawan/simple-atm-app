@@ -1,4 +1,3 @@
-import java.util.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,6 +17,7 @@ public class Transaction {
   public Transaction(double amount, CheckingAccount inCheckingAccount) {
     this.amount = amount;
     this.inCheckingAccount = inCheckingAccount;
+    inCheckingAccount.updateBalance(amount);
     this.timestamp = LocalDateTime.now();
     this.note = "";
   }
@@ -25,6 +25,7 @@ public class Transaction {
   public Transaction(double amount, SavingsAccount inSavingsAccount) {
     this.amount = amount;
     this.inSavingsAccount = inSavingsAccount;
+    inSavingsAccount.updateBalance(amount);
     this.timestamp = LocalDateTime.now();
     this.note = "";
   }

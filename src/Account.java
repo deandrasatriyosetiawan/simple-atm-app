@@ -29,9 +29,23 @@ public abstract class Account {
   // Get summary line for the account
   abstract public void printAccountSummary();
 
+  // Print the balance inquiry of the account
+  abstract public void printBalanceInquiry();
+
+  // Update the balance of the account
+  abstract public void updateBalance(double amount);
+
+  // Print the transaction history of the account
+  abstract public void printTransactionHistory();
+
   // Get the account id number of the account
   protected String getAccountId() {
     return this.accountId;
+  }
+
+  // Set a new balance of the account
+  protected void setBalance(double newBalance) {
+    this.balance = newBalance;
   }
 
   // Get the balance of the account
@@ -59,6 +73,11 @@ public abstract class Account {
     return this.pin;
   }
 
+  // Get the list of transactions of the account
+  protected ArrayList<Transaction> getTransactionList() {
+    return this.transactions;
+  }
+
   // Validate the PIN with the bank card id number
   public boolean validatePin(String pin) {
     if (pin.compareTo(this.getPin()) == 0) {
@@ -72,18 +91,13 @@ public abstract class Account {
   // this.inBankCardId = newBankCardId;
   // }
 
-  // Get the list of transactions of the account
-  protected ArrayList<Transaction> getTransactionList() {
-    return this.transactions;
-  }
-
   // Print the transaction history of the account
-  public void printTransactionHistory() {
-    System.out.printf("\nTransaction history for account %s\n", this.accountId);
-    for (int len = this.transactions.size() - 1; len >= 0; len--) {
-      System.out.println(this.transactions.get(len).getSummaryTransaction());
-    }
-    System.out.println();
-  }
+  // public void printTransactionHistory() {
+  // System.out.printf("\nTransaction history for account %s\n", this.accountId);
+  // for (int len = this.transactions.size() - 1; len >= 0; len--) {
+  // System.out.println(this.transactions.get(len).getSummaryTransaction());
+  // }
+  // System.out.println();
+  // }
 
 }
