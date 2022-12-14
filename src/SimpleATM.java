@@ -36,7 +36,7 @@ public class SimpleATM {
 
             authenticatedAccount = bank.login(userId, bankCardId, pin);
             if (authenticatedAccount == null) {
-                System.out.println("Incorrect user ID/PIN combination or " +
+                System.out.println("\nIncorrect user ID/PIN combination or " +
                         "bank card ID\nis not registered. Please try again.");
             }
         } while (authenticatedAccount == null);
@@ -48,7 +48,7 @@ public class SimpleATM {
         currentAccount.printAccountSummary();
         int choice;
         do {
-            System.out.printf("Welcome %s, what do you want to do?\n",
+            System.out.printf("\nWelcome %s, what do you want to do?\n",
                     currentAccount.getHolder().getFirstName());
             System.out.println("[1] Change PIN");
             System.out.println("[2] Balance Inquiry");
@@ -64,7 +64,7 @@ public class SimpleATM {
             System.out.println();
 
             if (choice < 1 || choice > 8)
-                System.out.println("Invalid choice. Please choose 1-8.");
+                System.out.println("\nInvalid choice. Please choose 1-8.");
         } while (choice < 1 || choice > 8);
         // if (choice == 8) {
         // System.exit(0);

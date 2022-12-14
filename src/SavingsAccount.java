@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class SavingsAccount extends Account {
   // Initialize values to the attribute of the account
   public SavingsAccount(String bankCardId, String accountId, String pin, User holder) {
@@ -18,8 +20,8 @@ public class SavingsAccount extends Account {
     String accountId = this.getAccountId();
     System.out.print("\n\n" + this.getHolder().getFirstName() + "'s ");
     System.out.println("savings account summary");
-    System.out.println("Bank Card ID\t: " + bankCardId);
-    System.out.println("Account ID\t: " + accountId);
+    System.out.println("Bank card ID : " + bankCardId);
+    System.out.println("Account ID : " + accountId);
   }
 
   // Print the balance inquiry of the account
@@ -40,11 +42,17 @@ public class SavingsAccount extends Account {
   // Print the transaction history of the savings account
   @Override
   public void printTransactionHistory() {
-    System.out.printf("\nTransaction history for savings account %s\n", this.getAccountId());
-    for (int len = this.getTransactionList().size() - 1; len >= 0; len--) {
-      System.out.println(this.getTransactionList().get(len).getSummaryTransaction());
+    ArrayList<Transaction> transactions = this.getTransactionList();
+    boolean isEmpty = transactions.isEmpty();
+    System.out.printf("\nTransaction history for savings account %s :\n", this.getAccountId());
+    if (!isEmpty) {
+      for (int len = transactions.size() - 1; len >= 0; len--) {
+        System.out.println(transactions.get(len).getSummaryTransaction());
+      }
+      System.out.println();
+    } else {
+      System.out.println("\nNo transactions.");
     }
-    System.out.println();
   }
 
 }

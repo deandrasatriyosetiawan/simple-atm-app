@@ -107,22 +107,17 @@ public class Bank {
 
     String accountId = this.getNewAccountId();
     CheckingAccount newCheckingAccount = new CheckingAccount(bankCardId, accountId, pin, newUser);
-    this.addAccount(newCheckingAccount);
     accountId = this.getNewAccountId();
     SavingsAccount newSavingsAccount = new SavingsAccount(bankCardId, accountId, pin, newUser);
-    this.addAccount(newSavingsAccount);
+    this.addAccount(newCheckingAccount, newSavingsAccount);
     newUser.addAccount(newCheckingAccount, newSavingsAccount);
 
     return newUser;
   }
 
-  // Add a new checking account to the bank
-  public void addAccount(CheckingAccount newCheckingAccount) {
+  // Add a new checking account and savings account to the bank
+  public void addAccount(CheckingAccount newCheckingAccount, SavingsAccount newSavingsAccount) {
     this.checkingAccounts.add(newCheckingAccount);
-  }
-
-  // Add a new savings account to the bank
-  public void addAccount(SavingsAccount newSavingsAccount) {
     this.savingsAccounts.add(newSavingsAccount);
   }
 

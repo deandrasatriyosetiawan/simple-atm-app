@@ -34,9 +34,9 @@ public class User {
   // Print an information that a new user has been created
   public void printUserInfo() {
     String bankCardId = this.bankCardIdList.get(bankCardIdList.size() - 1);
-    System.out.println("New user " + this.fullName + " has been created");
-    System.out.println("with user ID\t: " + this.userId);
-    System.out.println("with bank card ID\t: " + bankCardId);
+    System.out.println("\nNew user " + this.fullName + " has been created");
+    System.out.println("User ID : " + this.userId);
+    System.out.println("Bank card ID : " + bankCardId);
   }
 
   // Get the user id number
