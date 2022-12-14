@@ -1,7 +1,7 @@
 import java.util.*;
 
 public abstract class Account {
-  // The account identity number of the account
+  // The account id number of the account
   private String accountId;
   // The PIN of the account
   private String pin;
@@ -9,7 +9,7 @@ public abstract class Account {
   private double balance;
   // The user that owns this account
   private User holder;
-  // The bank card identity number in which the account was linked
+  // The bank card id number in which the account was linked
   private String inBankCardId;
   // The list of transactions for this account
   private ArrayList<Transaction> transactions;
@@ -27,9 +27,9 @@ public abstract class Account {
   abstract public void addTransaction(double amount, String note);
 
   // Get summary line for the account
-  abstract public String getSummaryLine();
+  abstract public void printAccountSummary();
 
-  // Get the account identity number of the account
+  // Get the account id number of the account
   protected String getAccountId() {
     return this.accountId;
   }
@@ -49,12 +49,25 @@ public abstract class Account {
     return this.holder;
   }
 
-  // Get the bank card identity number of the account
+  // Get the bank card id number of the account
   protected String getBankCardId() {
     return this.inBankCardId;
   }
 
-  // Add a bank card identity number of the account
+  // Set a new PIN of the account
+  protected void setPin(String newPin) {
+    this.pin = newPin;
+  }
+
+  // Validate the PIN with the bank card id number
+  public boolean validatePin(String pin) {
+    if (pin.compareTo(this.getPin()) == 0) {
+      return true;
+    }
+    return false;
+  }
+
+  // Add a bank card id number of the account
   // public void addBankCardId(String newBankCardId) {
   // this.inBankCardId = newBankCardId;
   // }
@@ -71,11 +84,6 @@ public abstract class Account {
       System.out.println(this.transactions.get(len).getSummaryTransaction());
     }
     System.out.println();
-  }
-
-  //
-  public boolean validatePin(String pin) {
-
   }
 
 }

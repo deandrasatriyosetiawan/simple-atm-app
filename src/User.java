@@ -5,9 +5,9 @@ public class User {
   private String fullName;
   // The first name of the user
   private String firstName;
-  // The user identity number of the user
+  // The user id number of the user
   private String userId;
-  // The list of user's bank card identity number
+  // The list of user's bank card id number
   private ArrayList<String> bankCardIdList;
   // The checking account of the user
   private ArrayList<CheckingAccount> checkingAccounts;
@@ -18,12 +18,24 @@ public class User {
   // create an empty lists of checking accounts and saving accounts,
   // and also print an information that a new user has been created
   public User(String fullName, String bankCardId, Bank bank) {
-    this.fullName = fullName;
-    this.bankCardIdList.add(bankCardId);
-    this.userId = bank.getNewUserId();
     this.checkingAccounts = new ArrayList<CheckingAccount>();
     this.savingsAccounts = new ArrayList<SavingsAccount>();
-    System.out.printf("New user " + fullName + " with ID " + this.userId + " created");
+    this.bankCardIdList = new ArrayList<String>();
+    this.fullName = fullName;
+    this.userId = bank.getNewUserId();
+    this.bankCardIdList.add(bankCardId);
+    // System.out.println("New user " + fullName + " has been created");
+    // System.out.println("with user ID\t: " + this.userId);
+    // System.out.println("with bank card ID\t: " + bankCardId);
+    this.printUserInfo();
+  }
+
+  // Print an information that a new user has been created
+  public void printUserInfo() {
+    String bankCardId = this.bankCardIdList.get(bankCardIdList.size() - 1);
+    System.out.println("New user " + this.fullName + " has been created");
+    System.out.println("with user ID\t: " + this.userId);
+    System.out.println("with bank card ID\t: " + bankCardId);
   }
 
   // Get the user id number
@@ -59,9 +71,9 @@ public class User {
   }
 
   // Print summary for the account of this user
-  public void printAccountSummary(CheckingAccount checkingAccount) {
-    System.out.print("\n\n" + this.getFirstName() + "'s ");
-    System.out.println(checkingAccount.getSummaryLine() + "\n");
-  }
+  // public void printAccountSummary(CheckingAccount checkingAccount) {
+  // System.out.print("\n\n" + this.getFirstName() + "'s ");
+  // System.out.println(checkingAccount.getSummaryLine() + "\n");
+  // }
 
 }

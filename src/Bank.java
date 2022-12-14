@@ -9,7 +9,7 @@ public class Bank {
   private ArrayList<CheckingAccount> checkingAccounts;
   // The list of savings accounts in this bank
   private ArrayList<SavingsAccount> savingsAccounts;
-  // The list of bank cards identity number in this bank
+  // The list of bank cards id number in this bank
   private ArrayList<String> bankCardIdList;
 
   // Set a name of the bank and create an empty lists of users,
@@ -27,7 +27,7 @@ public class Bank {
     return this.name;
   }
 
-  // Generate a new user identity number for a user
+  // Generate a new user id number for a user
   public String getNewUserId() {
     String userId;
     Random random = new Random();
@@ -48,7 +48,7 @@ public class Bank {
     return userId;
   }
 
-  // Generate a new account identity number for an account
+  // Generate a new account id number for an account
   public String getNewAccountId() {
     String accountId;
     Random random = new Random();
@@ -75,7 +75,7 @@ public class Bank {
     return accountId;
   }
 
-  // Generate a new bank card identity number for a user's card
+  // Generate a new bank card id number for a user's card
   public String getNewBankCardId() {
     String bankCardId;
     Random random = new Random();
@@ -106,7 +106,7 @@ public class Bank {
     this.savingsAccounts.add(newSavingsAccount);
   }
 
-  // Add a new bank card identity to the bank
+  // Add a new bank card id to the bank
   public void addBankCardId(String newBankCardId) {
     this.bankCardIdList.add(newBankCardId);
   }
@@ -114,16 +114,16 @@ public class Bank {
   // Add a new user to the bank and also create checking account
   // and savings account for the user
   public User addUser(String fullName, String pin) {
-    String bankCardId = this.getNewBankCardId();
+    String bankCardId = getNewBankCardId();
     this.addBankCardId(bankCardId);
 
     User newUser = new User(fullName, bankCardId, this);
     this.users.add(newUser);
 
-    String accountId = this.getNewAccountId();
+    String accountId = getNewAccountId();
     CheckingAccount newCheckingAccount = new CheckingAccount(bankCardId, accountId, pin, newUser);
     this.addAccount(newCheckingAccount);
-    accountId = this.getNewAccountId();
+    accountId = getNewAccountId();
     SavingsAccount newSavingsAccount = new SavingsAccount(bankCardId, accountId, pin, newUser);
     this.addAccount(newSavingsAccount);
     newUser.addAccount(newCheckingAccount, newSavingsAccount);
@@ -131,29 +131,29 @@ public class Bank {
     return newUser;
   }
 
-  // Get the User object if user identity number and PIN are valid
-  public User userLogin(String userId, String pin) {
-    boolean isCorrect;
-    User checkingAccountHolder, savingsAccountHolder;
-    for(Account account : this.checkingAccounts) {
-      int isUserIdEquals = userId.compareTo(account.getHolder().getUserId());
-      if(isUserIdEquals == 0) {
-        checkingAccountHolder = account.getHolder();
-        // isCorrect = account.validatePin(pin);
+  // Get the Account object if user id number, bank card id number, and PIN are
+  // valid
+  public Account login(String userId, String bankCardId, String pin) {
+    boolean isThePinCorrect;
+    for (User user : users) {
+      if (userId.compareTo(user.getUserId()) != 0) {
+        return null;
       }
     }
-    for(Account account : this.savingsAccounts) {
-      int isUserIdEquals = userId.compareTo(account.getHolder().getUserId());
-      if(isUserIdEquals == 0) {
-        savingsAccountHolder = account.getHolder();
-        // isCorrect = account.validatePin(pin);
+    for (String registeredBankCardId : bankCardIdList) {
+      if (bankCardId.compareTo(registeredBankCardId) != 0) {
+        return null;
       }
     }
-    for(User user : this.users) {
-      
-      if (userId.compareTo(user.getUserId()) == 0 && user.) {
+    for (Account checkingAccount : checkingAccounts) {
+      if (bankCardId.compareTo(checkingAccount.getBankCardId()) == 0) {
+        isThePinCorrect = checkingAccount.validatePin(pin);
+        if (isThePinCorrect) {
+          return checkingAccount;
+        }
       }
     }
+    return null;
   }
 
 }

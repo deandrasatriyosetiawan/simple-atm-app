@@ -15,10 +15,11 @@ public class CheckingAccount extends Account {
 
   // Get summary line for the checking account
   @Override
-  public String getSummaryLine() {
+  public void printAccountSummary() {
     double balance = this.getBalance();
     String accountId = this.getAccountId();
-    return String.format("checking account summary\n%s : $%.2f", accountId, balance);
+    System.out.print("\n\n" + this.getHolder().getFirstName() + "'s ");
+    System.out.printf("checking account summary\n%s : $%.2f", accountId, balance);
   }
 
 }
