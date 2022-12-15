@@ -49,7 +49,7 @@ public class SavingsAccount extends Account {
         System.out.println(transactions.get(len).getSummaryTransaction());
       }
     } else {
-      System.out.println("\nNo transactions.\n");
+      System.out.println("\nNo transactions.");
     }
   }
 
