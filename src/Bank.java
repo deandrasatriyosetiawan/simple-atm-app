@@ -22,11 +22,6 @@ public class Bank {
     this.bankCardIdList = new ArrayList<String>();
   }
 
-  // Get the name of the bank
-  public String getName() {
-    return this.name;
-  }
-
   // Generate a new user id number for a user
   public String getNewUserId() {
     String userId;
@@ -96,6 +91,11 @@ public class Bank {
     return bankCardId;
   }
 
+  // Get the name of the bank
+  public String getName() {
+    return this.name;
+  }
+
   // Add a new user to the bank and also create checking account
   // and savings account for the user
   public User addUser(String fullName, String pin) {
@@ -126,6 +126,26 @@ public class Bank {
     this.bankCardIdList.add(newBankCardId);
   }
 
+  // Get a checking account from the list of checking account
+  public Account getAccount(Account account) {
+    String bankCardId = account.getBankCardId();
+    String accountId = account.getAccountId();
+    for (Account checkingAccount : checkingAccounts) {
+      if (accountId.compareTo(checkingAccount.getAccountId()) == 0) {
+        break;
+      }
+      if (bankCardId.compareTo(checkingAccount.getBankCardId()) == 0) {
+        return checkingAccount;
+      }
+    }
+    for (Account savingsAccount : savingsAccounts) {
+      if (bankCardId.compareTo(savingsAccount.getBankCardId()) == 0) {
+        return savingsAccount;
+      }
+    }
+    return null;
+  }
+
   // Get the Account object if user id number, bank card id number, and PIN are
   // valid
   public Account login(String userId, String bankCardId, String pin) {
@@ -146,26 +166,6 @@ public class Bank {
         if (isThePinCorrect) {
           return checkingAccount;
         }
-      }
-    }
-    return null;
-  }
-
-  // Get a checking account from the list of checking account
-  public Account getAccount(Account account) {
-    String bankCardId = account.getBankCardId();
-    String accountId = account.getAccountId();
-    for (Account checkingAccount : checkingAccounts) {
-      if (accountId.compareTo(checkingAccount.getAccountId()) == 0) {
-        break;
-      }
-      if (bankCardId.compareTo(checkingAccount.getBankCardId()) == 0) {
-        return checkingAccount;
-      }
-    }
-    for (Account savingsAccount : savingsAccounts) {
-      if (bankCardId.compareTo(savingsAccount.getBankCardId()) == 0) {
-        return savingsAccount;
       }
     }
     return null;

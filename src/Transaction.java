@@ -46,16 +46,16 @@ public class Transaction {
     this.note = note;
   }
 
-  // Get the amount of the transaction
-  public double getAmount() {
-    return this.amount;
-  }
-
   // Change the format of the transaction's timestamp
   private String changeTimestampFormat(LocalDateTime timestamp) {
     DateTimeFormatter timestampFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     String formattedTimestamp = timestamp.format(timestampFormatter);
     return formattedTimestamp;
+  }
+
+  // Get the amount of the transaction
+  public double getAmount() {
+    return this.amount;
   }
 
   // Get a summary of the transaction

@@ -13,6 +13,14 @@ public class SavingsAccount extends Account {
     this.getTransactionList().add(newTransaction);
   }
 
+  // Update the balance of the savings account
+  @Override
+  public void updateBalance(double amount) {
+    double newBalance = this.getBalance();
+    newBalance += amount;
+    this.setBalance(newBalance);
+  }
+
   // Get summary line for the savings account
   @Override
   public void printAccountSummary() {
@@ -29,14 +37,6 @@ public class SavingsAccount extends Account {
   public void printBalanceInquiry() {
     double balance = this.getBalance();
     System.out.printf("\nBalance\t: $%.2f\n", balance);
-  }
-
-  // Update the balance of the savings account
-  @Override
-  public void updateBalance(double amount) {
-    double newBalance = this.getBalance();
-    newBalance += amount;
-    this.setBalance(newBalance);
   }
 
   // Print the transaction history of the savings account
