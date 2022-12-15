@@ -171,15 +171,4 @@ public class Bank {
     return null;
   }
 
-  // Get a savings account from the list of savings account
-  // public Account getAccount(Account checkingAccount) {
-  // String bankCardId = checkingAccount.getBankCardId();
-  // for (Account savingsAccount : savingsAccounts) {
-  // if (bankCardId.compareTo(savingsAccount.getBankCardId()) == 0) {
-  // return savingsAccount;
-  // }
-  // }
-  // return null;
-  // }
-
 }

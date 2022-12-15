@@ -87,18 +87,4 @@ public abstract class Account {
     return false;
   }
 
-  // Add a bank card id number of the account
-  // public void addBankCardId(String newBankCardId) {
-  // this.inBankCardId = newBankCardId;
-  // }
-
-  // Print the transaction history of the account
-  // public void printTransactionHistory() {
-  // System.out.printf("\nTransaction history for account %s\n", this.accountId);
-  // for (int len = this.transactions.size() - 1; len >= 0; len--) {
-  // System.out.println(this.transactions.get(len).getSummaryTransaction());
-  // }
-  // System.out.println();
-  // }
-
 }

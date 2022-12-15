@@ -18,7 +18,7 @@ public class SavingsAccount extends Account {
   public void printAccountSummary() {
     String bankCardId = this.getBankCardId();
     String accountId = this.getAccountId();
-    System.out.print("\n\n" + this.getHolder().getFirstName() + "'s ");
+    System.out.print("\n" + this.getHolder().getFirstName() + "'s ");
     System.out.println("savings account summary");
     System.out.println("Bank card ID : " + bankCardId);
     System.out.println("Account ID : " + accountId);
@@ -28,7 +28,7 @@ public class SavingsAccount extends Account {
   @Override
   public void printBalanceInquiry() {
     double balance = this.getBalance();
-    System.out.printf("Balance\t: $%.2f\n", balance);
+    System.out.printf("\nBalance\t: $%.2f\n", balance);
   }
 
   // Update the balance of the savings account
@@ -43,12 +43,11 @@ public class SavingsAccount extends Account {
   @Override
   public void printTransactionHistory() {
     ArrayList<Transaction> transactions = this.getTransactionList();
-    System.out.printf("T\nransaction history for savings account %s :\n", this.getAccountId());
+    System.out.printf("\nTransaction history for savings account %s :\n", this.getAccountId());
     if (!transactions.isEmpty()) {
       for (int len = transactions.size() - 1; len >= 0; len--) {
         System.out.println(transactions.get(len).getSummaryTransaction());
       }
-      // System.out.println();
     } else {
       System.out.println("\nNo transactions.\n");
     }

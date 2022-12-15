@@ -1,15 +1,13 @@
 import java.util.*;
 
 public class SimpleATM {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         // Scanner object for getting input from keyboard
         Scanner scanner = new Scanner(System.in);
         // Initialize the name of our bank
         Bank bank = new Bank("Pochita Bank");
         // Add a user to our bank
-        bank.addUser("Anya Forger", "123456");
-        // The reference for users who will log in
-        // User currentUser;
+        bank.addUser("Anya Forger", "111222");
         // The reference for users who will log in as an owner of the account
         Account currentAccount;
         // The interface of the ATM
@@ -26,13 +24,15 @@ public class SimpleATM {
         String userId, bankCardId, pin;
         Account authenticatedAccount;
         do {
-            System.out.printf("\nWelcome to %s\n\n", bank.getName());
+            System.out.println("=========================================================\n");
+            System.out.printf("Welcome to %s\n\n", bank.getName());
             System.out.print("Enter user ID : ");
             userId = scanner.nextLine();
             System.out.print("Enter bank card ID : ");
             bankCardId = scanner.nextLine();
             System.out.print("Enter PIN : ");
             pin = scanner.nextLine();
+            System.out.println("\n=========================================================");
 
             authenticatedAccount = bank.login(userId, bankCardId, pin);
             if (authenticatedAccount == null) {
@@ -95,25 +95,9 @@ public class SimpleATM {
         }
 
         if (choice != 8) {
-            scanner.nextLine();
             SimpleATM.mainMenu(currentAccount, scanner, bank);
         }
     }
-
-    // Lead the user to return to main menu
-    // public static void returnToMainMenu(Account currentAccount, Scanner scanner,
-    // Bank bank) {
-    // scanner.nextLine();
-    // String input, newLine = System.getProperty("line.separator");
-    // do {
-    // System.out.print("\nPlease click enter to return to main menu.");
-    // input = scanner.nextLine();
-    // if (input.compareTo(newLine) == 0) {
-    // scanner.nextLine();
-    // SimpleATM.mainMenu(currentAccount, scanner, bank);
-    // }
-    // } while (input.compareTo(newLine) != 0);
-    // }
 
     // Change the PIN of the bank card id
     public static void changePin(Account currentAccount, Scanner scanner, Bank bank) {
@@ -168,16 +152,14 @@ public class SimpleATM {
         currentAccount.setPin(newPin);
         Account account = bank.getAccount(currentAccount);
         account.setPin(newPin);
-        // SimpleATM.returnToMainMenu(currentAccount, scanner, bank);
-        SimpleATM.mainMenu(currentAccount, scanner, bank);
+        System.out.println("\n=========================================================");
 
     }
 
     // Show the balance inquiry of the account
     public static void showBalanceInquiry(Account currentAccount, Scanner scanner, Bank bank) {
         currentAccount.printBalanceInquiry();
-        // SimpleATM.returnToMainMenu(currentAccount, scanner, bank);
-        SimpleATM.mainMenu(currentAccount, scanner, bank);
+        System.out.println("\n=========================================================");
     }
 
     // Withdrawal process from the account's balance
@@ -199,8 +181,7 @@ public class SimpleATM {
         String note = scanner.nextLine();
         amount *= -1;
         currentAccount.addTransaction(amount, typeOfTransaction, note);
-        // SimpleATM.returnToMainMenu(currentAccount, scanner, bank);
-        SimpleATM.mainMenu(currentAccount, scanner, bank);
+        System.out.println("\n=========================================================");
     }
 
     // Deposit process to the account's balance
@@ -218,8 +199,7 @@ public class SimpleATM {
         System.out.printf("Enter a note : ");
         String note = scanner.nextLine();
         currentAccount.addTransaction(amount, typeOfTransaction, note);
-        // SimpleATM.returnToMainMenu(currentAccount, scanner, bank);
-        SimpleATM.mainMenu(currentAccount, scanner, bank);
+        System.out.println("\n=========================================================");
     }
 
     // Transfer process from the account's balance
@@ -248,15 +228,13 @@ public class SimpleATM {
         } else if (className.compareTo("SavingsAccount") == 0) {
             System.out.println("\nSavings account can't transfer to a checking account.");
         }
-        // SimpleATM.returnToMainMenu(currentAccount, scanner, bank);
-        SimpleATM.mainMenu(currentAccount, scanner, bank);
+        System.out.println("\n=========================================================");
     }
 
     // Show the transaction history of the account
     public static void showTransactionHistory(Account currentAccount, Scanner scanner, Bank bank) {
         currentAccount.printTransactionHistory();
-        // SimpleATM.returnToMainMenu(currentAccount, scanner, bank);
-        SimpleATM.mainMenu(currentAccount, scanner, bank);
+        System.out.println("\n=========================================================");
     }
 
     // Switch from checking account to savings account and vice versa
@@ -268,7 +246,6 @@ public class SimpleATM {
         } else if (className.compareTo("SavingsAccount") == 0) {
             System.out.println("\nSwitched to savings account.");
         }
-        // SimpleATM.returnToMainMenu(currentAccount, scanner, bank);
-        SimpleATM.mainMenu(currentAccount, scanner, bank);
+        System.out.println("\n=========================================================");
     }
 }
