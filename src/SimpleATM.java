@@ -93,10 +93,6 @@ public class SimpleATM {
                 scanner.nextLine();
                 break;
         }
-
-        if (choice != 8) {
-            SimpleATM.mainMenu(currentAccount, scanner, bank);
-        }
     }
 
     // Change the PIN of the bank card id
@@ -152,7 +148,9 @@ public class SimpleATM {
         currentAccount.setPin(newPin);
         Account account = bank.getAccount(currentAccount);
         account.setPin(newPin);
+
         System.out.println("\n=========================================================");
+        SimpleATM.mainMenu(currentAccount, scanner, bank);
 
     }
 
@@ -160,6 +158,7 @@ public class SimpleATM {
     public static void showBalanceInquiry(Account currentAccount, Scanner scanner, Bank bank) {
         currentAccount.printBalanceInquiry();
         System.out.println("\n=========================================================");
+        SimpleATM.mainMenu(currentAccount, scanner, bank);
     }
 
     // Withdrawal process from the account's balance
@@ -181,7 +180,9 @@ public class SimpleATM {
         String note = scanner.nextLine();
         amount *= -1;
         currentAccount.addTransaction(amount, typeOfTransaction, note);
+
         System.out.println("\n=========================================================");
+        SimpleATM.mainMenu(currentAccount, scanner, bank);
     }
 
     // Deposit process to the account's balance
@@ -199,7 +200,9 @@ public class SimpleATM {
         System.out.printf("Enter a note : ");
         String note = scanner.nextLine();
         currentAccount.addTransaction(amount, typeOfTransaction, note);
+
         System.out.println("\n=========================================================");
+        SimpleATM.mainMenu(currentAccount, scanner, bank);
     }
 
     // Transfer process from the account's balance
@@ -228,13 +231,16 @@ public class SimpleATM {
         } else if (className.compareTo("SavingsAccount") == 0) {
             System.out.println("\nSavings account can't transfer to a checking account.");
         }
+
         System.out.println("\n=========================================================");
+        SimpleATM.mainMenu(currentAccount, scanner, bank);
     }
 
     // Show the transaction history of the account
     public static void showTransactionHistory(Account currentAccount, Scanner scanner, Bank bank) {
         currentAccount.printTransactionHistory();
         System.out.println("\n=========================================================");
+        SimpleATM.mainMenu(currentAccount, scanner, bank);
     }
 
     // Switch from checking account to savings account and vice versa
@@ -246,6 +252,8 @@ public class SimpleATM {
         } else if (className.compareTo("SavingsAccount") == 0) {
             System.out.println("\nSwitched to savings account.");
         }
+
         System.out.println("\n=========================================================");
+        SimpleATM.mainMenu(currentAccount, scanner, bank);
     }
 }

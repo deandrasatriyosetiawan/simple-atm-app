@@ -43,7 +43,7 @@ public class CheckingAccount extends Account {
   @Override
   public void printTransactionHistory() {
     ArrayList<Transaction> transactions = this.getTransactionList();
-    System.out.printf("\nTransaction history for checking account %s :\n", this.getAccountId());
+    System.out.printf("\nTransaction history for checking account with ID %s :\n", this.getAccountId());
     if (!transactions.isEmpty()) {
       for (int len = transactions.size() - 1; len >= 0; len--) {
         System.out.println(transactions.get(len).getSummaryTransaction());
