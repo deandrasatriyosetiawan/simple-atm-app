@@ -8,6 +8,8 @@ public class Transaction {
   private LocalDateTime timestamp;
   // The note for the transaction
   private String note;
+  // The type of the transaction
+  private String typeOfTransaction;
   // The checking account in which the transaction was performed
   private CheckingAccount inCheckingAccount;
   // The savings account in which the transaction was performed
@@ -19,6 +21,7 @@ public class Transaction {
     this.inCheckingAccount = inCheckingAccount;
     inCheckingAccount.updateBalance(amount);
     this.timestamp = LocalDateTime.now();
+    this.typeOfTransaction = "";
     this.note = "";
   }
 
@@ -27,16 +30,19 @@ public class Transaction {
     this.inSavingsAccount = inSavingsAccount;
     inSavingsAccount.updateBalance(amount);
     this.timestamp = LocalDateTime.now();
+    this.typeOfTransaction = "";
     this.note = "";
   }
 
-  public Transaction(double amount, String note, CheckingAccount inCheckingAccount) {
+  public Transaction(double amount, String typeOfTransaction, String note, CheckingAccount inCheckingAccount) {
     this(amount, inCheckingAccount);
+    this.typeOfTransaction = typeOfTransaction;
     this.note = note;
   }
 
-  public Transaction(double amount, String note, SavingsAccount inSavingsAccount) {
+  public Transaction(double amount, String typeOfTransaction, String note, SavingsAccount inSavingsAccount) {
     this(amount, inSavingsAccount);
+    this.typeOfTransaction = typeOfTransaction;
     this.note = note;
   }
 
@@ -55,7 +61,7 @@ public class Transaction {
   // Get a summary of the transaction
   public String getSummaryTransaction() {
     String timestamp = this.changeTimestampFormat(this.timestamp);
-    return String.format("%s : $%.2f : %s", timestamp, this.amount, this.note);
+    return String.format("%s | $%.2f : %s : %s", timestamp, this.amount, this.typeOfTransaction, this.note);
   }
 
 }

@@ -25,7 +25,7 @@ public abstract class Account {
   }
 
   // Add a new transaction of the account
-  abstract public void addTransaction(double amount, String note);
+  abstract public void addTransaction(double amount, String typeOfTransaction, String note);
 
   // Get summary line for the account
   abstract public void printAccountSummary();

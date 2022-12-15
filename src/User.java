@@ -37,6 +37,7 @@ public class User {
     System.out.println("\nNew user " + this.fullName + " has been created");
     System.out.println("User ID : " + this.userId);
     System.out.println("Bank card ID : " + bankCardId);
+    System.out.println();
   }
 
   // Get the user id number

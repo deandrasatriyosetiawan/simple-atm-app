@@ -8,8 +8,8 @@ public class CheckingAccount extends Account {
 
   // Add a new transaction in the checking account
   @Override
-  public void addTransaction(double amount, String note) {
-    Transaction newTransaction = new Transaction(amount, note, this);
+  public void addTransaction(double amount, String typeOfTransaction, String note) {
+    Transaction newTransaction = new Transaction(amount, typeOfTransaction, note, this);
     this.getTransactionList().add(newTransaction);
   }
 
@@ -48,8 +48,8 @@ public class CheckingAccount extends Account {
       for (int len = transactions.size() - 1; len >= 0; len--) {
         System.out.println(transactions.get(len).getSummaryTransaction());
       }
-      System.out.println();
-    } else if (transactions.isEmpty()) {
+      // System.out.println();
+    } else {
       System.out.println("\nNo transactions.");
     }
   }

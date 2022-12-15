@@ -8,8 +8,8 @@ public class SavingsAccount extends Account {
 
   // Add a new transaction in the savings account
   @Override
-  public void addTransaction(double amount, String note) {
-    Transaction newTransaction = new Transaction(amount, note, this);
+  public void addTransaction(double amount, String typeOfTransaction, String note) {
+    Transaction newTransaction = new Transaction(amount, typeOfTransaction, note, this);
     this.getTransactionList().add(newTransaction);
   }
 
@@ -43,15 +43,14 @@ public class SavingsAccount extends Account {
   @Override
   public void printTransactionHistory() {
     ArrayList<Transaction> transactions = this.getTransactionList();
-    boolean isEmpty = transactions.isEmpty();
-    System.out.printf("\nTransaction history for savings account %s :\n", this.getAccountId());
-    if (!isEmpty) {
+    System.out.printf("T\nransaction history for savings account %s :\n", this.getAccountId());
+    if (!transactions.isEmpty()) {
       for (int len = transactions.size() - 1; len >= 0; len--) {
         System.out.println(transactions.get(len).getSummaryTransaction());
       }
-      System.out.println();
+      // System.out.println();
     } else {
-      System.out.println("\nNo transactions.");
+      System.out.println("\nNo transactions.\n");
     }
   }
 
